@@ -2,45 +2,24 @@
   "transactions": [
     {
       "type": "income",
-      "category": "travel",
-      "amount": "458",
-      "descriptions": "daasdasdadad",
+      "category": "salary",
+      "amount": "5000",
+      "descriptions": "my first salary",
       "id": 1
     },
     {
       "type": "expense",
-      "category": "medical",
-      "amount": "852",
-      "descriptions": "sddadsaadasd",
+      "category": "food",
+      "amount": "1200",
+      "descriptions": "Food cost\n",
       "id": 2
     },
     {
       "type": "income",
-      "category": "travel",
-      "amount": "525",
-      "descriptions": "bandarban",
-      "id": 3
-    },
-    {
-      "type": "expense",
       "category": "personal",
-      "amount": "852",
-      "descriptions": "sddadasdasdfafdsafsf",
-      "id": 4
-    },
-    {
-      "type": "expense",
-      "category": "travel",
-      "amount": "585",
-      "descriptions": "sagor",
-      "id": 5
-    },
-    {
-      "type": "income",
-      "category": "salary",
-      "amount": "42542",
-      "descriptions": "fafasdasd",
-      "id": 6
+      "amount": "500",
+      "descriptions": "upori income",
+      "id": 3
     }
   ]
 }

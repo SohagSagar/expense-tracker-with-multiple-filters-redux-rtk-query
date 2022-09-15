@@ -42,7 +42,6 @@ const Transaction = ({ transaction, setIsUpdateModalOpen }) => {
         setEditMode(true);
     }
 
-    console.log(updateType);
 
     // decide what to render based on edit mode
     const descriptionsItem = editMode ? <input onChange={e => setDescriptions(e.target.value)} type="text" placeholder="Type here" value={updateDescriptions} className="input input-bordered input-sm max-w-xs !outline-none " /> : descriptions;
@@ -111,20 +110,20 @@ const Transaction = ({ transaction, setIsUpdateModalOpen }) => {
                     editMode ?
                         <>
                             <button disabled={updateLoading} onClick={handleEdit}>
-                                <img className='h-8 w-8 cursor-pointer' src="https://img.icons8.com/color/48/000000/checked-2--v1.png" alt="" srcset="" />
+                                <img className='h-8 w-8 cursor-pointer' src="https://img.icons8.com/color/48/000000/checked-2--v1.png" alt="" srcSet="" />
                             </button>
                             <button onClick={() => setEditMode(false)}>
-                                <img className='h-8 w-8 cursor-pointer' src="https://img.icons8.com/emoji/48/000000/cross-mark-emoji.png" alt="" srcset="" />
+                                <img className='h-8 w-8 cursor-pointer' src="https://img.icons8.com/emoji/48/000000/cross-mark-emoji.png" alt="" srcSet="" />
                             </button>
                         </> :
 
                         <>
                             <button disabled={isLoading} onClick={() => handleEditMode(true)}>
-                                <img className='h-6 w-6 cursor-pointer' src="https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/48/000000/external-edit-user-interface-tanah-basah-detailed-outline-tanah-basah.png" alt="" srcset="" />
+                                <img className='h-6 w-6 cursor-pointer' src="https://img.icons8.com/external-tanah-basah-detailed-outline-tanah-basah/48/000000/external-edit-user-interface-tanah-basah-detailed-outline-tanah-basah.png" alt="" srcSet="" />
                             </button>
 
                             <button disabled={isLoading} onClick={handleDelete}>
-                                <img className='h-6 w-6 cursor-pointer' src="https://img.icons8.com/wired/64/000000/filled-trash.png" alt="" srcset="" />
+                                <img className='h-6 w-6 cursor-pointer' src="https://img.icons8.com/wired/64/000000/filled-trash.png" alt="" srcSet="" />
                             </button>
                         </>
 

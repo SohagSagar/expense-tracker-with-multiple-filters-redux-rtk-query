@@ -4,15 +4,23 @@ import { useGetTransactionsQuery } from '../features/api/apiSlice';
 import AddModal from './AddModal';
 import Transaction from './Transaction';
 import TransactionsHeader from './TransactionsHeader';
-import UpdateModal from './UpdateModal';
 
 
 const Transactions = () => {
     const [isAddModalOpen, setIsAddModalOpen] = useState(true);
-    const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(true);
-    const { data: transactions, isError, isLoading, error } = useGetTransactionsQuery() || {};
+    const { searchedText, dataSorted, minRange, maxRange, type: typedFilter, category: filterCategory } = useSelector(state => state.filter)
 
-    const { searchedText,dataSorted } = useSelector(state => state.filter)
+
+    let queryString = '';
+    if (typedFilter.length > 0) {
+        queryString += `${typedFilter.length > 0 && typedFilter.map(t => `type=${t}`).join('&') + '&'}`
+    }
+    if (filterCategory.length > 0) {
+        queryString += `${filterCategory.length > 0 && filterCategory.map(c => `category=${c}`).join('&') + '&'}`
+    }
+
+    const { data: transactions, isError, isLoading, error } = useGetTransactionsQuery(queryString) || {};
+
 
     // filter data
     const searchFilter = (val) => {
@@ -24,7 +32,22 @@ const Transactions = () => {
         }
     }
 
-    const dataSort=(a, b) =>  dataSorted ? -1 : 1
+    const filterByMinValue = (val) => {
+        if (!minRange) {
+            return val;
+        } else if (minRange > 0) {
+            return val.amount >= minRange
+        }
+    }
+    const filterByMaxValue = (val) => {
+        if (!maxRange) {
+            return val;
+        } else if (maxRange > minRange) {
+            return val.amount <= maxRange
+        }
+    }
+
+    const dataSort = (a, b) => dataSorted ? 1 : -1
 
 
     // decide what to render
@@ -37,14 +60,19 @@ const Transactions = () => {
             ?.reverse()
             ?.sort(dataSort)
             ?.filter(searchFilter)
-            .map(transaction => <Transaction key={transaction?.id} transaction={transaction} setIsAddModalOpen={setIsAddModalOpen} />)
+            ?.filter(filterByMinValue)
+            ?.filter(filterByMaxValue)
+            ?.map(transaction => <Transaction key={transaction?.id} transaction={transaction} setIsAddModalOpen={setIsAddModalOpen} />)
 
 
     return (
         <div >
             <TransactionsHeader setIsAddModalOpen={setIsAddModalOpen} />
             <div className='max-h-[500px] overflow-y-auto'>
-                {content}
+                {content?.length === 0 ?
+                    <div className='border w-full mt-3 text-center py-3 rounded-md'>No Transaction Found</div> : content
+
+                }
             </div>
 
             {isAddModalOpen && <AddModal setIsAddModalOpen={setIsAddModalOpen} />}

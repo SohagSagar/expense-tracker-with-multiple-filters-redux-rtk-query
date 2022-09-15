@@ -27,14 +27,16 @@ const TransactionsHeader = ({ setIsAddModalOpen }) => {
 
     useEffect(() => {
         debounce(searched, 1500);
-        // setInput(search)
     }, [searchInput]);
 
 
     const handleSort = () =>{
         setIsSorted(pre=>!pre)
-        dispatch(sorted(isSorted))
     }
+    useEffect(()=>{
+        dispatch(sorted(isSorted))
+    },[isSorted,dispatch])
+
 
 
     
@@ -46,8 +48,8 @@ const TransactionsHeader = ({ setIsAddModalOpen }) => {
                     {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 relative left-[280px] top-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg> */}
                 </div>
 
-                <div >
-                    <button onClick={handleSort} className="btn btn-square "><img className='h-6 w-6' alt='' src={sortImg}></img></button>
+                <div onClick={handleSort}>
+                    <button  className="btn btn-square "><img className='h-6 w-6' alt='' src={sortImg}></img></button>
 
                 </div>
 
