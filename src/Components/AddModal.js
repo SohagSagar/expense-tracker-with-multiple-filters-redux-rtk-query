@@ -38,7 +38,7 @@ const AddModal = ({ setIsAddModalOpen }) => {
             <input type="checkbox" id="add-modal" className="modal-toggle" />
             <div className="modal">
                 <div className="modal-box relative">
-                    <label htmlFor="add-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    
                     <h3 className="text-lg font-bold text-center">Add Transaction</h3><hr className=' mb-3' />
                     <form onSubmit={handleSubmit}>
                         <div className='flex justify-center gap-x-3'>

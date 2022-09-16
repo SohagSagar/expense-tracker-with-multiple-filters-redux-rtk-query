@@ -3,22 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { categoryRemoved, categorySelected, clearFilters, maxValue, minValue, typedRemoved, typedSelected } from '../features/filterSlice/filterSlice';
 
 const Filter = () => {
-    const { minRange, maxRange, type: filterType,category:filterCategory,searchedText } = useSelector(state => state.filter)
+    const { minRange, maxRange, type: filterType, category: filterCategory, searchedText } = useSelector(state => state.filter)
     const dispatch = useDispatch()
 
     const [minInput, setMinInput] = useState(minRange);
     const [maxInput, setMaxInput] = useState(maxRange);
 
-    
+
 
     useEffect(() => {
         if (minInput > 0) {
             dispatch(minValue(+minInput))
-        } 
+        }
         if (!minInput) {
             dispatch(minValue(0))
         }
-        
+
     }, [minInput, dispatch])
 
     useEffect(() => {
@@ -39,32 +39,40 @@ const Filter = () => {
         }
 
     }
-    const category = (category) =>{
-        if(filterCategory.includes(category)){
+    const category = (category) => {
+        if (filterCategory.includes(category)) {
             dispatch(categoryRemoved(category))
-        }else{
+        } else {
             dispatch(categorySelected(category))
         }
     }
 
-    const clear = () =>{
+    const clear = () => {
         dispatch(clearFilters());
         setMinInput('');
         setMaxInput('')
     }
 
-    const [isFilter,setIsFilter]=useState(false);
-    useEffect(()=>{
-        if(minRange || maxRange || filterType.length>0 || filterCategory.length>0 || searchedText){
+    const [isFilter, setIsFilter] = useState(false);
+    useEffect(() => {
+        if (minRange || maxRange || filterType.length > 0 || filterCategory.length > 0 || searchedText) {
             setIsFilter(true)
-        }else{
+        } else {
             setIsFilter(false)
         }
-    },[minRange,maxRange,filterType,filterCategory,searchedText]);
+    }, [minRange, maxRange, filterType, filterCategory, searchedText]);
 
     return (
         <div className='border min-h-full rounded-md p-2 '>
-            <h2 className='mb-2'>Filter {isFilter && <span onClick={clear} className="btn btn-xs btn-error text-white">Clear All</span>}</h2><hr className='mb-3' />
+            <div className='flex items-center justify-between mb-2'>
+                <div className='flex items-center gap-x-2'>
+                    <h2 className='mb-2'>Filter </h2>
+                    {isFilter && <span onClick={clear} className="btn btn-xs btn-error text-white">Clear All</span>}
+                </div>
+                <label htmlFor="my-drawer-2" className='text-2xl cursor-pointer lg:hidden'><img src="https://img.icons8.com/ios-glyphs/30/000000/multiply.png" alt="" srcset="" /></label>
+            </div>
+            <hr className='mb-3' />
+
             {/* range filter */}
 
             <h5>Range</h5>

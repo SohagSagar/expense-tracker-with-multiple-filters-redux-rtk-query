@@ -9,8 +9,11 @@ const Sidebar = () => {
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content pr-0 pt-4">
                     {/* <!-- Page content here --> */}
-                    <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+                    <label htmlFor="my-drawer-2" className=" cursor-pointer drawer-button lg:hidden font-semibold">
+                        <img className='inline' src={"https://img.icons8.com/external-jumpicon-glyph-ayub-irawan/32/000000/external-hamburger-basic-ui-jumpicon-glyph-jumpicon-glyph-ayub-irawan-2.png"} alt="" srcset="" />FILTERS</label>
                     <Transactions/>
+
+                    
 
                 </div>
                 <div className="drawer-side -z-100">

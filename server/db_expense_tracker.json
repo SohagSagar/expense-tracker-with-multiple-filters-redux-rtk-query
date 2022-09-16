@@ -29,13 +29,6 @@
       "id": 7
     },
     {
-      "type": "income",
-      "category": "travel",
-      "amount": "141",
-      "descriptions": "dfghfhg",
-      "id": 8
-    },
-    {
       "type": "expense",
       "category": "utilities",
       "amount": "42542",
