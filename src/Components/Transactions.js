@@ -18,8 +18,28 @@ const Transactions = () => {
     if (filterCategory.length > 0) {
         queryString += `${filterCategory.length > 0 && filterCategory.map(c => `category=${c}`).join('&') + '&'}`
     }
+    if(searchedText){
+        queryString+=`&descriptions_like=${searchedText+'&'}`
+    }
+    if(minRange>0){
+        queryString+=''
+    }
+
 
     const { data: transactions, isError, isLoading, error } = useGetTransactionsQuery(queryString) || {};
+
+    // data for pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(5);
+
+
+    // Get current posts
+    const indexOfLastTransaction = currentPage * postsPerPage;
+    const indexOfFirstTransaction = indexOfLastTransaction - postsPerPage;
+    const currentTransactions = transactions?.length > 0 ? transactions?.slice(indexOfFirstTransaction, indexOfLastTransaction) : [];
+
+    // get total page
+    const totalPage = Math.ceil(transactions?.length / postsPerPage);
 
 
     // filter data
@@ -46,8 +66,10 @@ const Transactions = () => {
             return val.amount <= maxRange
         }
     }
+    const dataSort = (a, b) => dataSorted ? -1 : 1;
 
-    const dataSort = (a, b) => dataSorted ? 1 : -1
+    const [data,setData]=useState([])
+    
 
 
     // decide what to render
@@ -56,10 +78,9 @@ const Transactions = () => {
     if (!isLoading && isError) content = <div className='text-red-600 border w-full mt-3 text-center py-3 rounded-md'>{error}</div>
     if (!isLoading && !isError && transactions?.length === 0) content = <div className='border w-full mt-3 text-center py-3 rounded-md'>No Transaction Found</div>
     if (!isLoading && !isError && transactions?.length > 0) content =
-        [...transactions]
+        [...currentTransactions]
             ?.reverse()
             ?.sort(dataSort)
-            ?.filter(searchFilter)
             ?.filter(filterByMinValue)
             ?.filter(filterByMaxValue)
             ?.map(transaction => <Transaction key={transaction?.id} transaction={transaction} setIsAddModalOpen={setIsAddModalOpen} />)
@@ -67,10 +88,10 @@ const Transactions = () => {
 
     return (
         <div >
-            <TransactionsHeader setIsAddModalOpen={setIsAddModalOpen} />
+            <TransactionsHeader setIsAddModalOpen={setIsAddModalOpen} currentPage={currentPage} totalPage={totalPage} setCurrentPage={setCurrentPage}/>
             <div className='max-h-[500px] overflow-y-auto'>
                 {content?.length === 0 ?
-                    <div className='border w-full mt-3 text-center py-3 rounded-md'>No Transaction Found</div> : content
+                    <div className='border w-full mt-3 text-center py-3 rounded-md'>No Transaction Found</div> : content 
 
                 }
             </div>

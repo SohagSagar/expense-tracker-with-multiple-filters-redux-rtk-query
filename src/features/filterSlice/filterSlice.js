@@ -7,7 +7,7 @@ const initialState = {
     minRange: 0,
     maxRange: 0,
     type: [],
-    category:[]
+    category: []
 }
 
 const filterSlice = createSlice({
@@ -33,19 +33,27 @@ const filterSlice = createSlice({
         },
         typedRemoved: (state, action) => {
             const updateType = state.type.filter(t => t !== action.payload);
-            state.type=updateType;
+            state.type = updateType;
         },
-        categorySelected:(state, action) => {
+        categorySelected: (state, action) => {
             if (!state.category.includes(action.payload)) {
                 state.category.push(action.payload)
             }
         },
-        categoryRemoved:(state, action) => {
+        categoryRemoved: (state, action) => {
             const updateCategory = state.category.filter(t => t !== action.payload);
-            state.category=updateCategory;
+            state.category = updateCategory;
+        },
+        clearFilters: (state) => {
+            state.searchedText = ''
+            state.dataSorted = false
+            state.minRange = 0
+            state.maxRange = 0
+            state.type = []
+            state.category = []
         }
     }
 })
 
-export const { updateId, search, sorted, minValue, maxValue, typedSelected, typedRemoved,categorySelected ,categoryRemoved} = filterSlice.actions
+export const { updateId, search, sorted, minValue, maxValue, typedSelected, typedRemoved, categorySelected, categoryRemoved,clearFilters } = filterSlice.actions
 export default filterSlice.reducer; 

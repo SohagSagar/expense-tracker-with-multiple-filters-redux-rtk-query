@@ -3,16 +3,9 @@
     {
       "type": "income",
       "category": "salary",
-      "amount": "5000",
+      "amount": "2000",
       "descriptions": "my first salary",
       "id": 1
-    },
-    {
-      "type": "expense",
-      "category": "food",
-      "amount": "1200",
-      "descriptions": "Food cost\n",
-      "id": 2
     },
     {
       "type": "income",
@@ -20,6 +13,34 @@
       "amount": "500",
       "descriptions": "upori income",
       "id": 3
+    },
+    {
+      "type": "income",
+      "category": "salary",
+      "amount": "1000",
+      "descriptions": "salary",
+      "id": 6
+    },
+    {
+      "type": "expense",
+      "category": "medical",
+      "amount": "1500",
+      "descriptions": "medical expense",
+      "id": 7
+    },
+    {
+      "type": "income",
+      "category": "travel",
+      "amount": "141",
+      "descriptions": "dfghfhg",
+      "id": 8
+    },
+    {
+      "type": "expense",
+      "category": "utilities",
+      "amount": "42542",
+      "descriptions": "dfzfzcz",
+      "id": 9
     }
   ]
 }

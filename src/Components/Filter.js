@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { categoryRemoved, categorySelected, maxValue, minValue, typedRemoved, typedSelected } from '../features/filterSlice/filterSlice';
+import { categoryRemoved, categorySelected, clearFilters, maxValue, minValue, typedRemoved, typedSelected } from '../features/filterSlice/filterSlice';
 
 const Filter = () => {
-    const { minRange, maxRange, type: filterType,category:filterCategory } = useSelector(state => state.filter)
+    const { minRange, maxRange, type: filterType,category:filterCategory,searchedText } = useSelector(state => state.filter)
     const dispatch = useDispatch()
 
     const [minInput, setMinInput] = useState(minRange);
@@ -14,9 +14,11 @@ const Filter = () => {
     useEffect(() => {
         if (minInput > 0) {
             dispatch(minValue(+minInput))
-        } if (!minInput) {
+        } 
+        if (!minInput) {
             dispatch(minValue(0))
         }
+        
     }, [minInput, dispatch])
 
     useEffect(() => {
@@ -45,10 +47,24 @@ const Filter = () => {
         }
     }
 
+    const clear = () =>{
+        dispatch(clearFilters());
+        setMinInput('');
+        setMaxInput('')
+    }
+
+    const [isFilter,setIsFilter]=useState(false);
+    useEffect(()=>{
+        if(minRange || maxRange || filterType.length>0 || filterCategory.length>0 || searchedText){
+            setIsFilter(true)
+        }else{
+            setIsFilter(false)
+        }
+    },[minRange,maxRange,filterType,filterCategory,searchedText]);
 
     return (
         <div className='border min-h-full rounded-md p-2 '>
-            <h2 >Filter</h2><hr className='mb-2' />
+            <h2 className='mb-2'>Filter {isFilter && <span onClick={clear} className="btn btn-xs btn-error text-white">Clear All</span>}</h2><hr className='mb-3' />
             {/* range filter */}
 
             <h5>Range</h5>
