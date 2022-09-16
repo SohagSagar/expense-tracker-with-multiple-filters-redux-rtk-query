@@ -3,36 +3,36 @@ import {createApi,fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 export const apiSlice = createApi({
     reducerPath:'api',
     baseQuery:fetchBaseQuery({
-        baseUrl:'http://localhost:9000',
+        baseUrl:'https://react-redux-json-server.herokuapp.com',
 
     }),
     tagTypes:['transactions'],
     endpoints: (builder)=>({
         addTransaction:builder.mutation({
             query:(data)=> ({
-                url:'transactions',
+                url:'db_expense_tracker',
                 method:'POST',
                 body:data
             }),
             invalidatesTags:['transactions']
         }),
         getTransactions:builder.query({
-            query:(queryString)=> `/transactions?${queryString && queryString}`,
+            query:(queryString)=> `/db_expense_tracker?${queryString && queryString}`,
             providesTags:['transactions']
         }),
         getTransaction:builder.query({
-            query:(id)=>`/transactions?id=${id}`,
+            query:(id)=>`/db_expense_tracker?id=${id}`,
         }),
         deleteTransaction:builder.mutation({
             query:(id)=>({
-                url:`transactions/${id}`,
+                url:`db_expense_tracker/${id}`,
                 method:'DELETE',
             }),
             invalidatesTags:['transactions']
         }),
         UpdateTransaction:builder.mutation({
             query:({id,data})=>({
-                url:`transactions/${id}`,
+                url:`db_expense_tracker/${id}`,
                 method:'PATCH',
                 body:data
             }),
