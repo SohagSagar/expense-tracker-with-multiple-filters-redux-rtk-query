@@ -58,7 +58,7 @@ const TransactionsHeader = ({ setIsAddModalOpen, currentPage, totalPage, setCurr
                 </div>
 
                 <div className="btn-group ">
-                    <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)} className="btn xs:btn-sm lg:lg:btn-md xs:w-3">«</button>
+                    <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)} className="btn xs:btn-sm lg:btn-md xs:w-3">«</button>
                     <button className="btn lg:btn-md xs:btn-sm xs:w-10 w-20 normal-case lg:text-md xs:text-[12px]">Page {currentPage}/{totalPage || 1}</button>
                     <button disabled={currentPage === totalPage} onClick={() => setCurrentPage(currentPage + 1)} className="btn xs:btn-sm lg:btn-md xs:w-3">»</button>
                 </div>
