@@ -5,7 +5,7 @@ import Transactions from './Transactions';
 const Sidebar = () => {
     return (
         <div className=''>
-            <div className="drawer drawer-mobile">
+            <div className="drawer drawer-mobile top-100">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content pr-0 pt-4">
                     {/* <!-- Page content here --> */}

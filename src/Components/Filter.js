@@ -63,7 +63,7 @@ const Filter = () => {
     }, [minRange, maxRange, filterType, filterCategory, searchedText]);
 
     return (
-        <div className='border min-h-full rounded-md p-2 '>
+        <div className='border  rounded-md p-2 '>
             <div className='flex items-center justify-between mb-2'>
                 <div className='flex items-center gap-x-2'>
                     <h2 className='mb-2'>Filter </h2>

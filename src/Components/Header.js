@@ -15,7 +15,7 @@ const Header = () => {
         }
     })
     return (
-        <div className=' border rounded-md py-2 mt-2 sticky top-2 z-100 '>
+        <div className=' border rounded-md py-2 mt-2  top-2 '>
             <h2 className='text-center text-xl font-semibold my-1'>Personal Expense Tracker</h2>
             <div className='flex justify-center items-center gap-x-9 text-lg font-semibold'>
                 <h3 className='text-green-600'>Income: {income ? income : 0}</h3>
