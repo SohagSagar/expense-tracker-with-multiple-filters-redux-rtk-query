@@ -77,8 +77,8 @@ const Transaction = ({ transaction, setIsUpdateModalOpen }) => {
     return (
         <div className={`border ${type === 'income' ? 'border-green-400' : 'border-red-400'} rounded-md p-2 mt-2 flex justify-between items-center`}>
 
-            <div>
-                <p><span className='font-semibold inline'>Descriptions: </span> {descriptionsItem}</p>
+            <div className='w-[90%]'>
+                <p><span className='font-semibold inline !text-justify'>Descriptions: </span> {descriptionsItem}</p>
 
                 <p><span className='font-semibold'>Category: </span> {categoryItem}</p>
 

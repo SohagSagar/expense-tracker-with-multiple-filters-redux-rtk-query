@@ -17,7 +17,7 @@ export const apiSlice = createApi({
             invalidatesTags:['transactions']
         }),
         getTransactions:builder.query({
-            query:(queryString)=> `/db_expense_tracker?${queryString && queryString}`,
+            query:(queryString)=> `/db_expense_tracker?${queryString !==undefined ? queryString :''}`,
             providesTags:['transactions']
         }),
         getTransaction:builder.query({

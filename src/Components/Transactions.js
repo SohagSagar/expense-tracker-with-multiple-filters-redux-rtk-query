@@ -21,9 +21,7 @@ const Transactions = () => {
     if(searchedText){
         queryString+=`&descriptions_like=${searchedText+'&'}`
     }
-    if(minRange>0){
-        queryString+=''
-    }
+    
 
 
     const { data: transactions, isError, isLoading, error } = useGetTransactionsQuery(queryString) || {};

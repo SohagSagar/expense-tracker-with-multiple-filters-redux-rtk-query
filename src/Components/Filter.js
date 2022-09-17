@@ -66,7 +66,7 @@ const Filter = () => {
         <div className='border  rounded-md p-2 '>
             <div className='flex items-center justify-between mb-2'>
                 <div className='flex items-center gap-x-2'>
-                    <h2 className='mb-2'>Filter </h2>
+                    <h2 className='mb-2 font-semibold'>Filters </h2>
                     {isFilter && <span onClick={clear} className="btn btn-xs btn-error text-white">Clear All</span>}
                 </div>
                 <label htmlFor="my-drawer-2" className='text-2xl cursor-pointer lg:hidden'><img src="https://img.icons8.com/ios-glyphs/30/000000/multiply.png" alt="" srcset="" /></label>
@@ -75,7 +75,7 @@ const Filter = () => {
 
             {/* range filter */}
 
-            <h5>Range</h5>
+            <h5 className='font-semibold'>Range</h5>
             <div className='border rounded-md p-2 mt-1'>
                 <div className='flex justify-between items-center mb-2'>
                     <p>Min: </p>
@@ -90,7 +90,7 @@ const Filter = () => {
 
 
             {/* type */}
-            <h5 className='mt-2'>Type</h5>
+            <h5 className='mt-2 font-semibold'>Type</h5>
 
             <div className='border rounded-md p-2 mt-1 grid  gap-y-2'>
                 <div onClick={() => typeIncome('income')} className='flex items-center'>
@@ -111,7 +111,7 @@ const Filter = () => {
 
 
             {/* category */}
-            <h5 className='mt-2'>Category</h5>
+            <h5 className='mt-2 font-semibold'>Category</h5>
             <div className='border rounded-md p-2 mt-1 grid  gap-y-2'>
 
                 <div onClick={() => category('food')} className='flex items-center'>
