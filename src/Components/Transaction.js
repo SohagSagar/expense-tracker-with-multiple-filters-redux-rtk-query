@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useDeleteTransactionMutation, useUpdateTransactionMutation } from '../features/api/apiSlice';
 import { updateId } from '../features/filterSlice/filterSlice';
+import { numberWithCommas } from '../utility/thousandSeperator';
 
 
 const Transaction = ({ transaction, setIsUpdateModalOpen }) => {
@@ -11,6 +12,7 @@ const Transaction = ({ transaction, setIsUpdateModalOpen }) => {
     const [editMode, setEditMode] = useState(false);
     const [UpdateTransaction, { isLoading: updateLoading, isError: updateError, error: updateErrorMessage, isSuccess }] = useUpdateTransactionMutation()
 
+    const transactionAmount = numberWithCommas(amount)
     const handleDelete = () => {
         deleteTransaction(id);
     }
@@ -58,7 +60,7 @@ const Transaction = ({ transaction, setIsUpdateModalOpen }) => {
         </select> : category
 
     const amountItem = editMode ?
-        <input onChange={e => setAmount(e.target.value)} value={updateAmount} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs !outline-none" /> : amount;
+        <input onChange={e => setAmount(e.target.value)} value={updateAmount} type="text" placeholder="Type here" className="input input-bordered input-sm max-w-xs !outline-none" /> : transactionAmount;
 
     const expenseType =
         <div className='mt-2 inline'>
