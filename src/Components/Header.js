@@ -1,9 +1,10 @@
 import React from 'react';
 import { useGetTransactionsQuery } from '../features/api/apiSlice';
+import { useGetTransactions } from '../Hooks/useGetTransactions';
 import { numberWithCommas } from '../utility/thousandSeperator';
 
 const Header = () => {
-    const { data: transactions, isLoading } = useGetTransactionsQuery();
+    const {transactions, isLoading} =useGetTransactions()
 
     let income = 0;
     let expense = 0;

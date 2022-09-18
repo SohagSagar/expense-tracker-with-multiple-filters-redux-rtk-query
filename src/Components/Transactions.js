@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetTransactionsQuery } from '../features/api/apiSlice';
+import { useGetTransactions } from '../Hooks/useGetTransactions';
 import AddModal from './AddModal';
 import Transaction from './Transaction';
 import TransactionsHeader from './TransactionsHeader';
@@ -10,8 +11,15 @@ const Transactions = () => {
     const [isAddModalOpen, setIsAddModalOpen] = useState(true);
     const { searchedText, dataSorted, minRange, maxRange, type: typedFilter, category: filterCategory } = useSelector(state => state.filter)
 
+    // data for pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(5);
 
-    let queryString = '';
+
+    let queryString = `_page=${currentPage}&_limit=${postsPerPage}&`;
+
+
+
     if (typedFilter.length > 0) {
         queryString += `${typedFilter.length > 0 && typedFilter.map(t => `type=${t}`).join('&') + '&'}`
     }
@@ -23,33 +31,15 @@ const Transactions = () => {
     }
     
 
-
     const { data: transactions, isError, isLoading, error } = useGetTransactionsQuery(queryString) || {};
-
-    // data for pagination
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(7);
-
-
-    // Get current posts
-    const indexOfLastTransaction = currentPage * postsPerPage;
-    const indexOfFirstTransaction = indexOfLastTransaction - postsPerPage;
-    const currentTransactions = transactions?.length > 0 ? transactions?.slice(indexOfFirstTransaction, indexOfLastTransaction) : [];
+    const {transactions:t_length} =useGetTransactions() || {};
+    
 
     // get total page
-    const totalPage = Math.ceil(transactions?.length / postsPerPage);
+    let totalPage= 0;
+    totalPage = Math.ceil(t_length?.length / postsPerPage);
 
-
-    // filter data
-    const searchFilter = (val) => {
-        if (!searchedText) {
-            return val;
-        } else if (val.descriptions.toLowerCase().includes(searchedText.toLowerCase())
-        ) {
-            return val;
-        }
-    }
-
+ 
     const filterByMinValue = (val) => {
         if (!minRange) {
             return val;
@@ -66,7 +56,6 @@ const Transactions = () => {
     }
     const dataSort = (a, b) => dataSorted ? -1 : 1;
 
-    const [data,setData]=useState([])
     
 
 
@@ -76,7 +65,7 @@ const Transactions = () => {
     if (!isLoading && isError) content = <div className='text-red-600 border w-full mt-3 text-center py-3 rounded-md'>{error}</div>
     if (!isLoading && !isError && transactions?.length === 0) content = <div className='border w-full mt-3 text-center py-3 rounded-md'>No Transaction Found</div>
     if (!isLoading && !isError && transactions?.length > 0) content =
-        [...currentTransactions]
+        [...transactions]
             ?.reverse()
             ?.sort(dataSort)
             ?.filter(filterByMinValue)
@@ -95,7 +84,6 @@ const Transactions = () => {
             </div>
 
             {isAddModalOpen && <AddModal setIsAddModalOpen={setIsAddModalOpen} />}
-            {/* {isUpdateModalOpen && <UpdateModal setIsUpdateModalOpen={setIsUpdateModalOpen}/>} */}
 
         </div>
     );
